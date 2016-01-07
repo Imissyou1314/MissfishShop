@@ -61,6 +61,7 @@ public class ShopDetailActivity extends FragmentActivity implements
 	private ImageView faceImg;
 	private ImageView faceImgBg;
 	private LoadingDialog dialog;
+	private LinearLayout listLinear;
 	private MessageDialog messageDialog;
 	private TextView backTv;
 
@@ -81,6 +82,8 @@ public class ShopDetailActivity extends FragmentActivity implements
 		tv_sellers = (TextView) findViewById(R.id.id_seller_detail_seller);
 		cursor = (ImageView) findViewById(R.id.image_seller_detail_cursor);
 		pager = (ViewPager) findViewById(R.id.id_seller_detail_viewpager);
+		
+		listLinear = (LinearLayout) findViewById(R.id.seller_detail_linearLayout);
 
 		shopName = (TextView) findViewById(R.id.id_seller_detail_sellerName); // 商家名
 		msg_item1 = (TextView) findViewById(R.id.id_seller_detail_shipPort); // 靠岸口
@@ -152,12 +155,15 @@ public class ShopDetailActivity extends FragmentActivity implements
 	}
 	
 	private void initViewpager() {
+		
+		
 		int screenW = ScreenUtil.getWidth(this);
 		// 设置游标自适应长度
 		int dipToPixels = UnitUtil.DipToPixels(this, 2);
 		LinearLayout.LayoutParams lp = new LayoutParams((int) (screenW / 3.0),
 				dipToPixels);
-		//TODO
+		
+		/*设置ViewPager*/
 		cursor.setLayoutParams(lp);
 
 		bmpW = cursor.getHeight();
@@ -173,9 +179,10 @@ public class ShopDetailActivity extends FragmentActivity implements
 		views.add(goodFragment);
 		views.add(commentFragment);
 		views.add(sellerFragment);
-
+		
 		myPagerAdapter = new FragmentViewPagerAdapter(
 				getSupportFragmentManager(), pager, views, offset, bmpW, cursor);
+		
 		pager.setAdapter(myPagerAdapter);
 		pager.setCurrentItem(0);
 	}
