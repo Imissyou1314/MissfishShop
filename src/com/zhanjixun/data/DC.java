@@ -753,47 +753,17 @@ public class DC extends DataCenter {
 			this.getGoodDatailWild(dataReturnListener, TASK, pageIndex, pageSize, typenumber, categoryId);
 			break;
 		}
-		// switch (type) {
-		// //所有的商品
-		// case TaskTag.GOOD_ALL:
-		// getDatasFromServer(TaskTag.GOOD_ALL, URL, params,
-		// dataReturnListener);
-		// break;
-		// //所有的野生商品
-		// case TaskTag.GOOD_WILD:
-		// getDatasFromServer(TaskTag.GOOD_WILD, URL, params,
-		// dataReturnListener);
-		// break;
-		// //所有的养殖商品
-		// case TaskTag.GOOD_BREAD:
-		// getDatasFromServer(TaskTag.GOOD_BREAD, URL, params,
-		// dataReturnListener);
-		// break;
-		// //所有综合排序商品
-		// case TaskTag.COMPREHENSIVE_RANKING:
-		// getDatasFromServer(TaskTag.COMPREHENSIVE_RANKING, URL, params,
-		// dataReturnListener);
-		// break;
-		// //所有评分最高商品
-		// case TaskTag.COMMENT_HIGHEST:
-		// getDatasFromServer(TaskTag.COMMENT_HIGHEST, URL, params,
-		// dataReturnListener);
-		// break;
-		// //所有起送价最低商品
-		// case TaskTag.SEND_PRICE:
-		// getDatasFromServer(TaskTag.SEND_PRICE, URL, params,
-		// dataReturnListener);
-		// break;
-		// //所以销量最高
-		// case TaskTag.SALES_VOLUME:
-		// getDatasFromServer(TaskTag.SALES_VOLUME, URL, params,
-		// dataReturnListener);
-		// break;
-		// default:
-		// getDatasFromServer(TaskTag.GOOD_ALL,
-		// "fishshop/category_getGoodsShops.action", params,
-		// dataReturnListener);
-		// break;
-		// }
+	}
+	
+	/**
+	 * 搜索商品
+	 * @param dataReturnListener
+	 * @param search
+	 */
+	public void searchGoods(OnDataReturnListener dataReturnListener, String search) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("search", search);
+		//TODO URL 和 要不要分页加载
+		getDatasFromServer(TaskTag.SEARCH_GOOD, "", params, dataReturnListener);
 	}
 }

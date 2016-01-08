@@ -5,12 +5,27 @@
     android:id="@+id/search_Relative"
     android:orientation="vertical" >
     
+     <FrameLayout style="@style/TitleTheme" >
+
+        <TextView
+            style="@style/TitleLeftTheme"
+            android:clickable="true"
+            android:drawableLeft="@drawable/title_back"
+            android:drawableStart="@drawable/title_back"
+            android:onClick="onBack"
+            android:text="首页" />
+
+        <TextView
+            style="@style/TitleMiddleTheme"
+            android:text="搜索" />
+    </FrameLayout>
+    
     <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="3dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_alignParentTop="true"
         android:gravity="center_horizontal"
         android:background="@drawable/linearlayout"
@@ -27,6 +42,7 @@
             android:id="@+id/searche_ET"
             android:layout_height="30dp"
             android:textSize="13sp"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="5dp"
