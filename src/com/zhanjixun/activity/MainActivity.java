@@ -84,6 +84,7 @@ public class MainActivity extends FragmentActivity {
 		updateContentFragment(index);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void updateNavigationBarBackground(int index) {
 		LogUtils.v(index + "");
 		imgBtn_home.setImageResource(R.drawable.activity_main_home_normal);

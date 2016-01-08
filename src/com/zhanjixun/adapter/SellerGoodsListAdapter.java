@@ -21,6 +21,7 @@ import com.zhanjixun.domain2.CarOrder;
 import com.zhanjixun.domain2.Fisherman;
 import com.zhanjixun.domain2.Good;
 import com.zhanjixun.domain2.Seller;
+import com.zhanjixun.views.MessageDialog;
 
 @SuppressLint("InflateParams")
 public class SellerGoodsListAdapter extends BaseAdapter {
@@ -109,7 +110,8 @@ public class SellerGoodsListAdapter extends BaseAdapter {
 		@Override
 		public void onClick(View v) {
 			addToCarOrder(goodItemBean);
-			Toast.makeText(context, "添加成功！", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "添加成功！", Toast.LENGTH_LONG).show();
+			new MessageDialog(context, "添加成功！请转到购物车付款").show();
 			// v.setBackgroundColor(context.getResources().getColor(R.color.black));
 			v.setClickable(false);
 		}

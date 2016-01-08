@@ -61,7 +61,6 @@ public class ShopDetailActivity extends FragmentActivity implements
 	private ImageView faceImg;
 	private ImageView faceImgBg;
 	private LoadingDialog dialog;
-	private LinearLayout listLinear;
 	private MessageDialog messageDialog;
 	private TextView backTv;
 
@@ -83,8 +82,6 @@ public class ShopDetailActivity extends FragmentActivity implements
 		cursor = (ImageView) findViewById(R.id.image_seller_detail_cursor);
 		pager = (ViewPager) findViewById(R.id.id_seller_detail_viewpager);
 		
-		listLinear = (LinearLayout) findViewById(R.id.seller_detail_linearLayout);
-
 		shopName = (TextView) findViewById(R.id.id_seller_detail_sellerName); // 商家名
 		msg_item1 = (TextView) findViewById(R.id.id_seller_detail_shipPort); // 靠岸口
 		msg_item2 = (TextView) findViewById(R.id.id_seller_detail_returnTime); // 靠岸时间

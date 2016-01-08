@@ -1,5 +1,6 @@
 package com.zhanjixun.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -70,6 +71,7 @@ public class ReflashListViewTwo extends ListView implements OnScrollListener {
 	/**
 	 * 初始化头布局
 	 */
+	@SuppressWarnings("deprecation")
 	private void initHeaderView() {
 		headerView = new LinearLayout(getContext());
 		android.view.ViewGroup.LayoutParams lp = new LayoutParams(
@@ -103,6 +105,7 @@ public class ReflashListViewTwo extends ListView implements OnScrollListener {
 		downAnimation.setFillAfter(true); // 动画结束后, 停留在结束的位置上
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		switch (ev.getAction()) {

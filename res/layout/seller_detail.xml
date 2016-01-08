@@ -230,7 +230,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/theme" />
-
                 <com.zhanjixun.views.selfAdapterViewPager
                     android:id="@+id/id_seller_detail_viewpager"
                     android:layout_width="fill_parent"

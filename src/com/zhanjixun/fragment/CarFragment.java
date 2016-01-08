@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
-
 import com.zhanjixun.R;
 import com.zhanjixun.activity.LoginActivity;
 import com.zhanjixun.activity.SubmitOrder;

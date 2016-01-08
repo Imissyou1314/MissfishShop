@@ -18,6 +18,7 @@
             android:text="位置信息" />
 
         <ImageView
+            android:id="@+id/homeImage_search_normal"
             style="@style/TitleRightTheme"
             android:src="@drawable/search_normal" />
     </FrameLayout>
