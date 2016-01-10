@@ -96,6 +96,8 @@ public class TaskTag {
 	public static final String SALES_VOLUME ="SALES_VOLUME";
 
 	public static final String SEARCH_GOOD = "SEARCH_GOOD";
+
+	public static final String GET_SHENFEN = "GET_SHENFEN";
 	
 
 }

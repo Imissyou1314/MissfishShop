@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhanjixun.R;
@@ -39,6 +40,7 @@ public class GoodListActivity extends BackActivity implements
 	public static final int SQUID = 5;
 	public static final int GINSENG = 6;
 	public static final int OTHERS = 7;
+	public static final int SEARCH = 8;
 
 	private TextView titleTv;
 	private ReflashListViewTwo goodLv;
@@ -91,9 +93,27 @@ public class GoodListActivity extends BackActivity implements
 		case OTHERS:
 			titleTv.setText("其他");
 			break;
+		case SEARCH:
+			titleTv.setText("搜索结果");
+			initSearchResult();
 		default:
 			break;
 		}
+	}
+
+	/*加载搜索数据*/
+	private void initSearchResult() {
+		List<GoodListItem> items = MyGson.getInstance().fromJson(
+				getIntent().getStringExtra("goodlist"),
+				new TypeToken<List<GoodListItem>>() {
+				}.getType());
+		if (items.size() != 0) {
+			goods.addAll(items);
+			Toast.makeText(this, "共有" + items.size() + "条记录", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, "搜索结果为空", Toast.LENGTH_LONG).show();
+		}
+		
 	}
 
 	private void initData() {

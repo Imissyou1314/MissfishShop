@@ -609,11 +609,12 @@ public class DC extends DataCenter {
 	 * @param mail
 	 */
 	public void addAddress(OnDataReturnListener dataReturnListener, String phone, String name, String adsPhone,
-			String address, String mail) {
+			String address, String mail, long provinceId) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("userId", phone);
 		params.put("userName", name);
 		params.put("address", address);
+		params.put("addresscode", provinceId + "");
 		params.put("phone", adsPhone);
 		params.put("postcode", mail);
 
@@ -632,13 +633,14 @@ public class DC extends DataCenter {
 	 * @param mail
 	 */
 	public void updataAddress(OnDataReturnListener dataReturnListener, String addressId, String phone, String name,
-			String adsPhone, String address, String mail) {
+			String adsPhone, String address, String mail, long provinceId) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("getAddressId", addressId);
 		params.put("userId", phone);
 		params.put("userName", name);
 		params.put("address", address);
 		params.put("phone", adsPhone);
+		params.put("addresscode", provinceId + "");
 		params.put("postcode", mail);
 		getDatasFromServer(TaskTag.UPDATA_ADDRESS, "fishshop/getaddress_addGetAddress.action", params,
 				dataReturnListener);
@@ -762,8 +764,16 @@ public class DC extends DataCenter {
 	 */
 	public void searchGoods(OnDataReturnListener dataReturnListener, String search) {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("search", search);
+		params.put("categorySimpleName", search);
 		//TODO URL 和 要不要分页加载
-		getDatasFromServer(TaskTag.SEARCH_GOOD, "", params, dataReturnListener);
+		getDatasFromServer(TaskTag.SEARCH_GOOD, "fishshop/category_searchCateogry.action", params, dataReturnListener);
+	}
+	
+	/**
+	 * 获取省份
+	 * @param addAddressActivity
+	 */
+	public void getProvinces(OnDataReturnListener dataReturnListener) {
+		getDatasFromServer(TaskTag.GET_SHENFEN, "fishshop/region_allRegion.action", null, dataReturnListener);
 	}
 }
