@@ -22,10 +22,12 @@ import android.widget.EditText;
  * @author Imissyou
  *
  */
-public class SearchActivity extends BackActivity implements OnDataReturnListener, OnKeyListener{
+public class SearchActivity extends BackActivity implements OnDataReturnListener{
 	
 	private EditText searchET;
 	private Intent intent;
+	
+	private Integer STATUS = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +40,31 @@ public class SearchActivity extends BackActivity implements OnDataReturnListener
 
 	private void initViews() {
 		searchET = (EditText) findViewById(R.id.searche_ET);
+		
 		/*设置焦点变化触发事件*/
-		searchET.setOnKeyListener(this);
+		searchET.setOnKeyListener(new OnKeyListener() {
+			
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+					initData();
+					Log.v("Status==>num", "miss" + STATUS);
+				}
+				return false;
+			}
+		});
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		searchET.setText("");
+	}
 	
 	/*加载数据*/
 	private void initData() {
 		
-		String search = searchET.getText().toString().trim();
+		String search = searchET.getText().toString().toString();
 		Log.v("miss====>Search", search + "misss");
 		DC.getInstance().searchGoods(this, search);
 	}
@@ -65,15 +83,4 @@ public class SearchActivity extends BackActivity implements OnDataReturnListener
 			new MessageDialog(this, result.getResultParam().get("error"));
 		}	
 	}
-
-	@Override
-	public boolean onKey(View v, int keyCode, KeyEvent event) {
-		if (keyCode == 66) {
-			initData();
-			return true;
-		} else {
-			return false;
-		}	
-	}
-
 }

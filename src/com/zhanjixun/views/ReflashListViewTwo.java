@@ -71,7 +71,6 @@ public class ReflashListViewTwo extends ListView implements OnScrollListener {
 	/**
 	 * 初始化头布局
 	 */
-	@SuppressWarnings("deprecation")
 	private void initHeaderView() {
 		headerView = new LinearLayout(getContext());
 		android.view.ViewGroup.LayoutParams lp = new LayoutParams(

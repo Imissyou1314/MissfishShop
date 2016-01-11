@@ -158,7 +158,6 @@ public class OrderFragment extends Fragment implements OnDataReturnListener, OnR
 		t5.setOnClickListener(new MyOnClickListener(4));
 	}
 
-	@SuppressWarnings("deprecation")
 	private void setTextViewBg(int index) {
 		t1.setTextColor(0xaa000000);
 		t2.setTextColor(0xaa000000);

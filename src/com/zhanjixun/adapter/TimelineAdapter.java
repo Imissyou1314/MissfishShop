@@ -46,7 +46,6 @@ public class TimelineAdapter extends BaseAdapter {
 		return position;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder vh = null;

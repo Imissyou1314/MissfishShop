@@ -98,6 +98,8 @@ public class TaskTag {
 	public static final String SEARCH_GOOD = "SEARCH_GOOD";
 
 	public static final String GET_SHENFEN = "GET_SHENFEN";
+
+	public static final String DELETE_ORDERS = "DELETE_ORDERS";
 	
 
 }

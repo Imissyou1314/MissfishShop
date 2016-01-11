@@ -63,9 +63,16 @@ public class ChangeUserHeadImageActivity extends BackActivity implements OnClick
 		btnTakePhoto = (Button) findViewById(R.id.btn_tabkephoto);
 		btnPhotos = (Button) findViewById(R.id.btn_photo);
 
-		IC.getInstance().setForegound(headImageName, headImage);
+		
 		btnTakePhoto.setOnClickListener(this);
 		btnPhotos.setOnClickListener(this);
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		IC.getInstance().setForegound(headImageName, headImage);
 	}
 
 	/**

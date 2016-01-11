@@ -10,11 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhanjixun.R;
 import com.zhanjixun.base.BackActivity;
 import com.zhanjixun.data.DC;
 import com.zhanjixun.data.IC;
+import com.zhanjixun.data.TaskTag;
 import com.zhanjixun.domain2.BaseResult;
 import com.zhanjixun.domain2.Good;
 import com.zhanjixun.domain2.Order;
@@ -153,7 +155,7 @@ public class OrderInfoActivity extends BackActivity implements
 		case Order.state_finish:
 			orderStateTv.setText("已完成");
 			orderStateMsgTv.setText("");
-			btn.setText("已完成");
+			btn.setText("删除");
 			break;
 		default:
 			break;
@@ -170,6 +172,10 @@ public class OrderInfoActivity extends BackActivity implements
 		} else {
 			messageDialog = new MessageDialog(this, result.getResultInfo());
 			messageDialog.show();
+		}
+		if (taskTag.equals(TaskTag.DELETE_ORDERS)) {
+			Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
+			this.finish();
 		}
 	}
 
@@ -207,6 +213,8 @@ public class OrderInfoActivity extends BackActivity implements
 			this.startActivity(intent1);
 			break;
 		case Order.state_finish:
+			DC.getInstance().deleteOrders(this, order.getOrdersId());
+			
 			break;
 		default:
 			break;

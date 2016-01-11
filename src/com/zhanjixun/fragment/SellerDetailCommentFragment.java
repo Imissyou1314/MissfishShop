@@ -72,7 +72,6 @@ public class SellerDetailCommentFragment extends Fragment implements
 		initData();
 	}
 
-	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
 	public void initView() {
 		freshRatingBar = (RatingBar) getView().findViewById(
@@ -144,7 +143,6 @@ public class SellerDetailCommentFragment extends Fragment implements
 		speedQuality.setText(UnitUtil.NumberFormat(speedf.floatValue(), 1));
 	}
 
-	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
 	public void setCommentBtnClick(Button b) {
 		allComment.setBackground(getResources().getDrawable(

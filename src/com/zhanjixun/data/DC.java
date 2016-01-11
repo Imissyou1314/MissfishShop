@@ -774,6 +774,19 @@ public class DC extends DataCenter {
 	 * @param addAddressActivity
 	 */
 	public void getProvinces(OnDataReturnListener dataReturnListener) {
-		getDatasFromServer(TaskTag.GET_SHENFEN, "fishshop/region_allRegion.action", null, dataReturnListener);
+		getDatasFromServer(TaskTag.GET_SHENFEN, "region_allRegion.action", null, dataReturnListener);
+	}
+	
+	/**
+	 * É¾³ý¶©µ¥
+	 * @param dataReturnListener
+	 * @param ordersId
+	 */
+	public void deleteOrders(OnDataReturnListener dataReturnListener, String ordersId) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("ordersId", ordersId);
+		getDatasFromServer(TaskTag.DELETE_ORDERS, "fishshop/orders_deleteOrders.action", 
+				params, dataReturnListener);
+		
 	}
 }
