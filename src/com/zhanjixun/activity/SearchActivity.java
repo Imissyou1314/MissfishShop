@@ -7,11 +7,11 @@ import com.zhanjixun.data.DC;
 import com.zhanjixun.data.TaskTag;
 import com.zhanjixun.domain2.BaseResult;
 import com.zhanjixun.interfaces.OnDataReturnListener;
+import com.zhanjixun.utils.LogUtils;
 import com.zhanjixun.views.MessageDialog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
@@ -26,8 +26,6 @@ public class SearchActivity extends BackActivity implements OnDataReturnListener
 	
 	private EditText searchET;
 	private Intent intent;
-	
-	private Integer STATUS = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +44,9 @@ public class SearchActivity extends BackActivity implements OnDataReturnListener
 			
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+				if ( keyCode == KeyEvent.KEYCODE_ENTER && 
+						event.getAction() == KeyEvent.ACTION_DOWN) {
 					initData();
-					Log.v("Status==>num", "miss" + STATUS);
 				}
 				return false;
 			}
@@ -63,19 +61,15 @@ public class SearchActivity extends BackActivity implements OnDataReturnListener
 	
 	/*¼ÓÔØÊý¾Ý*/
 	private void initData() {
-		
 		String search = searchET.getText().toString().toString();
-		Log.v("miss====>Search", search + "misss");
 		DC.getInstance().searchGoods(this, search);
 	}
 
 	@Override
 	public void onDataReturn(String taskTag, BaseResult result, String json) {
 		if (result.getServiceResult()) {
-			
-			Log.v("result", result.getResultParam().toString() + "miss");
-			
 			if (taskTag.equals(TaskTag.SEARCH_GOOD)) {
+				LogUtils.d(result.getResultParam().toString());
 				intent.putExtra("goodlist", result.getResultParam().get("categoryList").toString());	
 				this.startActivity(intent);
 			}

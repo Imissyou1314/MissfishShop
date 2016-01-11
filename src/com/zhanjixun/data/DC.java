@@ -642,7 +642,7 @@ public class DC extends DataCenter {
 		params.put("phone", adsPhone);
 		params.put("addresscode", provinceId + "");
 		params.put("postcode", mail);
-		getDatasFromServer(TaskTag.UPDATA_ADDRESS, "fishshop/getaddress_addGetAddress.action", params,
+		getDatasFromServer(TaskTag.UPDATA_ADDRESS, "fishshop/getaddress_updateGetAddress.action", params,
 				dataReturnListener);
 	}
 

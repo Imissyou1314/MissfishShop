@@ -8,7 +8,9 @@ import com.zhanjixun.domain2.Seller;
 import com.zhanjixun.domain2.User;
 
 public class Constants {
-
+    
+	public static final int CHANGE_ADDRESS = 1;
+	
 	public static final String HOST = "http://www.earltech.cn:8080";
 
 //	public static final String HOST = "http://192.168.1.102:8080";

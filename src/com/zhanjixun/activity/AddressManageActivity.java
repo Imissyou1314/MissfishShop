@@ -38,6 +38,8 @@ public class AddressManageActivity extends BackActivity implements
 	private int postion;
 	private DoubleButtonMessageDialog dbMsgDialog;
 	private AdapterContextMenuInfo info;
+	
+	
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -92,6 +94,7 @@ public class AddressManageActivity extends BackActivity implements
 		// ÐÞ¸Ä
 		case 2:
 			Intent intent = new Intent(this, AddAddressActivity.class);
+			intent.setFlags(Constants.CHANGE_ADDRESS);
 			intent.putExtra("address", address.toString());
 			startActivity(intent);
 			break;
