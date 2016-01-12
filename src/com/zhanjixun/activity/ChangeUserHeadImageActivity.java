@@ -70,7 +70,6 @@ public class ChangeUserHeadImageActivity extends BackActivity implements OnClick
 	
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		IC.getInstance().setForegound(headImageName, headImage);
 	}
@@ -118,9 +117,7 @@ public class ChangeUserHeadImageActivity extends BackActivity implements OnClick
 				Bundle extras = data.getExtras();
 				head = extras.getParcelable("data");
 				if (head != null) {
-					// 取出图片
-					
-					BitmapUtils.BitmapToFile(head, Constants.CACHE_DIR, "UserImage.jpg");
+					BitmapUtils.BitmapToFile(head, Constants.CACHE_DIR, "UserImage.jpg");// 取出图片
 					File file = new File(Constants.CACHE_DIR+ "/"  + "UserImage.jpg");
 					if (null != file) {
 						UpFileToService.upLoadFile("UpFile", this, file, "/fishshop/user_updateUserImg.action", "userId",
@@ -181,7 +178,9 @@ public class ChangeUserHeadImageActivity extends BackActivity implements OnClick
 		}
 	}
 
-	/* 删除文件 */
+	/**
+	 * 删除文件 
+	 */
 	private void deleteFile() {
 		File delfile = new File(Environment.getExternalStorageDirectory() + "/head.jpg");
 		if (null != delfile) {

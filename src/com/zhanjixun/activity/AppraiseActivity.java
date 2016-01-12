@@ -175,7 +175,5 @@ public class AppraiseActivity extends BackActivity implements
 		default:
 			break;
 		}
-
 	}
-
 }

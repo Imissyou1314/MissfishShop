@@ -3,12 +3,6 @@ package com.zhanjixun.activity;
 
 import com.zhanjixun.R;
 import com.zhanjixun.base.BackActivity;
-import com.zhanjixun.data.DC;
-import com.zhanjixun.data.TaskTag;
-import com.zhanjixun.domain2.BaseResult;
-import com.zhanjixun.interfaces.OnDataReturnListener;
-import com.zhanjixun.utils.LogUtils;
-import com.zhanjixun.views.MessageDialog;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +16,7 @@ import android.widget.EditText;
  * @author Imissyou
  *
  */
-public class SearchActivity extends BackActivity implements OnDataReturnListener{
+public class SearchActivity extends BackActivity{
 	
 	private EditText searchET;
 	private Intent intent;
@@ -62,19 +56,7 @@ public class SearchActivity extends BackActivity implements OnDataReturnListener
 	/*º”‘ÿ ˝æ›*/
 	private void initData() {
 		String search = searchET.getText().toString().toString();
-		DC.getInstance().searchGoods(this, search);
-	}
-
-	@Override
-	public void onDataReturn(String taskTag, BaseResult result, String json) {
-		if (result.getServiceResult()) {
-			if (taskTag.equals(TaskTag.SEARCH_GOOD)) {
-				LogUtils.d(result.getResultParam().toString());
-				intent.putExtra("goodlist", result.getResultParam().get("categoryList").toString());	
-				this.startActivity(intent);
-			}
-		} else {
-			new MessageDialog(this, result.getResultParam().get("error"));
-		}	
+		intent.putExtra("search", search);	
+		this.startActivity(intent);
 	}
 }

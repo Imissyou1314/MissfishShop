@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -48,6 +49,7 @@ public class GoodListActivity extends BackActivity implements
 	private LoadingDialog dialog;
 	private String categoryId;
 	private List<GoodListItem> goods = new ArrayList<GoodListItem>();
+	private String search = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,34 +97,26 @@ public class GoodListActivity extends BackActivity implements
 			break;
 		case SEARCH:
 			titleTv.setText("搜索结果");
-			initSearchResult();
+			search  = getIntent().getStringExtra("search");
 		default:
 			break;
 		}
 	}
 
-	/*加载搜索数据*/
-	private void initSearchResult() {
-		List<GoodListItem> items = MyGson.getInstance().fromJson(
-				getIntent().getStringExtra("goodlist"),
-				new TypeToken<List<GoodListItem>>() {
-				}.getType());
-		if (items.size() != 0) {
-			goods.addAll(items);
-			Toast.makeText(this, "共有" + items.size() + "条记录", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(this, "搜索结果为空", Toast.LENGTH_LONG).show();
-		}
-		
-	}
-
+	/*请求服务器数据*/
 	private void initData() {
 		if (categoryId != null) {
 			dialog = new LoadingDialog(this);
 			dialog.show();
 			DC.getInstance().getGoodList(this, categoryId, pageIndex++,
 					PAGE_SIZE);
-		} else {
+		} else if (null != search) {
+			dialog = new LoadingDialog(this);
+			dialog.show();
+			DC.getInstance().searchGoods(this, search, pageIndex++,
+					PAGE_SIZE);
+			Log.v("搜索", search + "miss");
+		}  else {
 			LogUtils.w("categoryId=null");
 		}
 	}
@@ -136,17 +130,17 @@ public class GoodListActivity extends BackActivity implements
 	public void onDataReturn(String taskTag, BaseResult result, String json) {
 		dialog.dismiss();
 		if (result.getServiceResult()) {
-			if (taskTag.equals(TaskTag.GOOD_LIST)) {
+			if (taskTag.equals(TaskTag.GOOD_LIST) || taskTag.equals(TaskTag.SEARCH_GOOD)) {
 				List<GoodListItem> items = MyGson.getInstance().fromJson(result
 						.getResultParam().get("categoryList"),
 						new TypeToken<List<GoodListItem>>() {
 						}.getType());
 				if (items.size() != 0) {
 					goods.addAll(items);
+				} else {
+					Toast.makeText(this, "结果为空....", Toast.LENGTH_LONG).show();
 				}
 				initListViewData();
-				// Toast.makeText(this, items.size() == 0 ? "没有更多数据了" : "加载成功",
-				// Toast.LENGTH_LONG).show();
 			}
 		} else {
 			new MessageDialog(this, result.getResultInfo()).show();

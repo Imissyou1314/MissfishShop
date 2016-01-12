@@ -51,7 +51,6 @@ public class AddAddressActivity extends BackActivity implements OnDataReturnList
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_car_add_address);
 		initViews();
-
 		initData();
 	}
 
@@ -142,18 +141,17 @@ public class AddAddressActivity extends BackActivity implements OnDataReturnList
 		for (Province item : provinceList)
 			provinces.add(item.getName());
 
-//		spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, provinces);
-//		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerAdapter = new ArrayAdapter<>(this, R.layout.select_provinces_item,provinces);
 		spinnerAdapter.setDropDownViewResource(R.layout.select_provinces_dropdown_item);
 		select_provinces.setAdapter(spinnerAdapter);
+		
 		select_provinces.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				provinceId = id + 1;
 			}
-
+			
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 

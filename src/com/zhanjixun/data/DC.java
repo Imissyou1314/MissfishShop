@@ -762,11 +762,14 @@ public class DC extends DataCenter {
 	 * @param dataReturnListener
 	 * @param search
 	 */
-	public void searchGoods(OnDataReturnListener dataReturnListener, String search) {
+	public void searchGoods(OnDataReturnListener dataReturnListener, String search, 
+			int pageIndex, int pageSize) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("categorySimpleName", search);
+		params.put(new String("pageInfo.indexPageNum"), pageIndex + "");
+		params.put(new String("pageInfo.size"), pageSize + "");
 		//TODO URL 和 要不要分页加载
-		getDatasFromServer(TaskTag.SEARCH_GOOD, "fishshop/category_searchCateogry.action", params, dataReturnListener);
+		getDatasFromServer(TaskTag.GOOD_LIST, "fishshop/category_searchCateogry.action", params, dataReturnListener);
 	}
 	
 	/**
