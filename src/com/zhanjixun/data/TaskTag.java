@@ -100,6 +100,8 @@ public class TaskTag {
 	public static final String GET_SHENFEN = "GET_SHENFEN";
 
 	public static final String DELETE_ORDERS = "DELETE_ORDERS";
+
+	public static final String GET_TOPCATWFROY = "GET_TOPCATWFROY";
 	
 
 }

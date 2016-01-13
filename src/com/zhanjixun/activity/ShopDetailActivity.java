@@ -63,6 +63,8 @@ public class ShopDetailActivity extends FragmentActivity implements
 	private LoadingDialog dialog;
 	private MessageDialog messageDialog;
 	private TextView backTv;
+	/*获取商家的所有商品*/
+	private TextView getShopGoods;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class ShopDetailActivity extends FragmentActivity implements
 	}
 
 	private void initView() {
+		
+		getShopGoods = (TextView) findViewById(R.id.id_seller_detail_getAllGoods);
 		backTv = (TextView) findViewById(R.id.shop_back);
 		faceImg = (ImageView) findViewById(R.id.id_seller_detail_sellerImage);
 		faceImgBg = (ImageView) findViewById(R.id.id_seller_detail_sellerImage_bg);
@@ -86,7 +90,10 @@ public class ShopDetailActivity extends FragmentActivity implements
 		msg_item1 = (TextView) findViewById(R.id.id_seller_detail_shipPort); // 靠岸口
 		msg_item2 = (TextView) findViewById(R.id.id_seller_detail_returnTime); // 靠岸时间
 		msg_item3 = (TextView) findViewById(R.id.id_seller_detail_creditValue); // 信用值
-
+		
+		/*商店的使用商品还是页面goods*/
+		getShopGoods.setOnClickListener(new MyClickListener(0));
+		
 		tv_goods.setOnClickListener(new MyClickListener(0));
 		tv_comments.setOnClickListener(new MyClickListener(1));
 		tv_sellers.setOnClickListener(new MyClickListener(2));
@@ -193,6 +200,9 @@ public class ShopDetailActivity extends FragmentActivity implements
 
 		@Override
 		public void onClick(View v) {
+			if (v.getId() == R.id.id_seller_detail_getAllGoods) {
+//				DC.getInstance()  TODO 获取商店的所有商品
+			}
 			pager.setCurrentItem(index);
 		}
 	}

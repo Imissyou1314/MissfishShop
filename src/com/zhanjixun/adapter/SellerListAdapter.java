@@ -18,6 +18,7 @@ import com.zhanjixun.domain2.Fisherman;
 import com.zhanjixun.domain2.Location;
 import com.zhanjixun.domain2.Seller;
 import com.zhanjixun.utils.MyUtil;
+import com.zhanjixun.utils.StringUtil;
 
 public class SellerListAdapter extends BaseAdapter {
 
@@ -99,7 +100,7 @@ public class SellerListAdapter extends BaseAdapter {
 				R.string.farmer_distance)
 				+ MyUtil.distance(Constants.location, l2) + "Ç§Ã×");
 		vh.item_3.setText(context.getResources().getString(R.string.farmer_way)
-				+ farmers.getGetTypeString());
+				+ StringUtil.splistString(farmers.getGetTypeString().toString(), 1, ",", "]..."));
 	}
 
 	private void initFisherman(Seller seller, ViewHolder vh) {
@@ -112,8 +113,8 @@ public class SellerListAdapter extends BaseAdapter {
 				R.string.fishermen_return_time)
 				+ MyUtil.getDays(fishermen.getPortTime()) + "Ììºó");
 		vh.item_3.setText(context.getResources().getString(
-				R.string.fishermen_catch_way)
-				+ fishermen.getGetTypeString());
+				R.string.fishermen_catch_way) 
+				+ StringUtil.splistString(fishermen.getGetTypeString().toString(), 1, ",", "..."));
 	}
 
 	class ViewHolder {

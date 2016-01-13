@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.reflect.TypeToken;
 import com.zhanjixun.R;
 import com.zhanjixun.adapter.GoodListAdapter;
+import com.zhanjixun.adapter.TopGoodsAdapter;
 import com.zhanjixun.base.BackActivity;
 import com.zhanjixun.data.DC;
 import com.zhanjixun.data.TaskTag;
@@ -46,10 +46,13 @@ public class GoodListActivity extends BackActivity implements
 	private TextView titleTv;
 	private ReflashListViewTwo goodLv;
 	private GoodListAdapter adapter;
+	
+	private TopGoodsAdapter topAdapter;
 	private LoadingDialog dialog;
 	private String categoryId;
 	private List<GoodListItem> goods = new ArrayList<GoodListItem>();
 	private String search = null;
+	private Integer kind;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +63,19 @@ public class GoodListActivity extends BackActivity implements
 	}
 
 	private void initViews() {
+		kind = (Integer) getIntent().getExtras().get("kind");
 		titleTv = (TextView) findViewById(R.id.text_activity_goodlist_title);
 		goodLv = (ReflashListViewTwo) findViewById(R.id.text_activity_goodlist_list);
+		seletTitle(kind);
+		
+	}
+	
+	/*
+	 * 自定义加载数据
+	 */
+	private void seletTitle(int kind) {
 		adapter = new GoodListAdapter(this, goods);
 		goodLv.setAdapter(adapter);
-		goodLv.setOnRefreshListener(this);
-		goodLv.setOnItemClickListener(this);
-		Integer kind = (Integer) getIntent().getExtras().get("kind");
 		switch (kind) {
 		case FISH:
 			titleTv.setText("鱼类");
@@ -94,6 +103,9 @@ public class GoodListActivity extends BackActivity implements
 			break;
 		case OTHERS:
 			titleTv.setText("其他");
+			categoryId = "7";
+			topAdapter = new TopGoodsAdapter(this, goods);
+			goodLv.setAdapter(topAdapter);
 			break;
 		case SEARCH:
 			titleTv.setText("搜索结果");
@@ -101,28 +113,39 @@ public class GoodListActivity extends BackActivity implements
 		default:
 			break;
 		}
+		goodLv.setOnRefreshListener(this);
+		goodLv.setOnItemClickListener(this);
 	}
 
 	/*请求服务器数据*/
 	private void initData() {
-		if (categoryId != null) {
+		if (categoryId != null && !categoryId.equals("")) {
 			dialog = new LoadingDialog(this);
 			dialog.show();
-			DC.getInstance().getGoodList(this, categoryId, pageIndex++,
-					PAGE_SIZE);
-		} else if (null != search) {
+			if (categoryId.equals("7")) {
+				DC.getInstance().getTopCategory(this);
+			} else {
+				DC.getInstance().getGoodList(this, categoryId, pageIndex++,
+						PAGE_SIZE);
+			}
+		} else if (null !=  search && !search.equals("")) {
 			dialog = new LoadingDialog(this);
 			dialog.show();
 			DC.getInstance().searchGoods(this, search, pageIndex++,
 					PAGE_SIZE);
-			Log.v("搜索", search + "miss");
 		}  else {
 			LogUtils.w("categoryId=null");
 		}
 	}
-
+	
+	/**
+	 * 刷新页面
+	 */
 	private void initListViewData() {
 		adapter.notifyDataSetChanged();
+		if (topAdapter != null) {
+			topAdapter.notifyDataSetInvalidated();
+		}
 		goodLv.hideFooterView();
 	}
 
@@ -130,7 +153,9 @@ public class GoodListActivity extends BackActivity implements
 	public void onDataReturn(String taskTag, BaseResult result, String json) {
 		dialog.dismiss();
 		if (result.getServiceResult()) {
-			if (taskTag.equals(TaskTag.GOOD_LIST) || taskTag.equals(TaskTag.SEARCH_GOOD)) {
+			goods.clear();
+			if (taskTag.equals(TaskTag.GOOD_LIST) || taskTag.equals(TaskTag.SEARCH_GOOD) 
+					|| taskTag.equals(TaskTag.GET_TOPCATWFROY)) {
 				List<GoodListItem> items = MyGson.getInstance().fromJson(result
 						.getResultParam().get("categoryList"),
 						new TypeToken<List<GoodListItem>>() {
@@ -152,12 +177,20 @@ public class GoodListActivity extends BackActivity implements
 	public void onLoadingMore(View v) {
 		DC.getInstance().getGoodList(this, categoryId, pageIndex++, PAGE_SIZE);
 	}
-
+	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		GoodListItem item = (GoodListItem) parent.getAdapter()
 				.getItem(position);
+		
+		/*重新刷新页面*/
+		if (categoryId.equals("7")) {
+			seletTitle((int) parent.getAdapter().getItemId(position) + 1);
+			pageIndex-- ;
+			initData();
+			return ;
+		}
 		Intent intent = new Intent(this, GoodDetailActivity.class);
 		intent.putExtra("back", titleTv.getText());
 		intent.putExtra("simpleName", item.getCategorySimpleName());

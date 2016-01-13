@@ -1,5 +1,6 @@
 package com.zhanjixun.fragment;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -151,7 +152,7 @@ public class SellerDetailSellerFragment extends Fragment implements
 		parent.addView(initShowImageView(farmer.getShowImageUrls()));
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onDataReturn(String taskTag, BaseResult result, String json) {
 		
@@ -172,7 +173,13 @@ public class SellerDetailSellerFragment extends Fragment implements
 					fishmen.setShipPort(map.get("homePort").toString());
 					fishmen.setTonnage(map.get("tonnage").toString());
 					fishmen.setEnginePower(map.get("enginePower") + "W");
-					Date date = new Date(map.get("shipCreateTime").toString());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Date date = null;
+					try {
+						date = sdf.parse(map.get("shipCreateTime").toString());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 					fishmen.setPortTime(date);
 					fishmen.setGetType(map.get("getType").toString());
 					fishmen.setShowImageUrls((List<String>) map

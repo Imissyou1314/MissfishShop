@@ -792,4 +792,15 @@ public class DC extends DataCenter {
 				params, dataReturnListener);
 		
 	}
+	
+	/**
+	 * 获取所有的一级分类
+	 * @param dataReturnListener
+	 * @param pageIndex
+	 * @param pageSize
+	 */
+	public void getTopCategory(OnDataReturnListener dataReturnListener) {
+		getDatasFromServer(TaskTag.GET_TOPCATWFROY, "fishshop/category_getTopCategory.action", 
+				null, dataReturnListener);
+	}
 }
