@@ -134,7 +134,7 @@ public class OrderInfoActivity extends BackActivity implements
 		case Order.state_un_sent:
 			orderStateTv.setText("等待卖家发货");
 			orderStateMsgTv.setText("");
-			btn.setText("提醒发货");
+			btn.setText("提醒发货");//TODO
 			btn.setTag(Order.state_un_sent);
 			btn.setOnClickListener(this);
 			break;
@@ -188,8 +188,10 @@ public class OrderInfoActivity extends BackActivity implements
 			this.startActivity(intent2);
 			break;
 		case Order.state_un_sent:
+			//TODO 提现发货
 			break;
 		case Order.state_un_get:
+			//查看物流
 			Intent intent = new Intent(this, LogisiticeActivity.class);
 			try {
 				intent.putExtra("imageUrl", order.getOrdersDetail().get(0)
@@ -201,6 +203,7 @@ public class OrderInfoActivity extends BackActivity implements
 			this.startActivity(intent);
 			break;
 		case Order.state_un_commet:
+			//去评论
 			Intent intent1 = new Intent(this, AppraiseActivity.class);
 			try {
 				intent1.putExtra("imageUrl", order.getOrdersDetail().get(0)
@@ -213,6 +216,7 @@ public class OrderInfoActivity extends BackActivity implements
 			this.startActivity(intent1);
 			break;
 		case Order.state_finish:
+			//已经完成
 			DC.getInstance().deleteOrders(this, order.getOrdersId());
 			
 			break;

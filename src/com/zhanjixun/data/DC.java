@@ -516,9 +516,9 @@ public class DC extends DataCenter {
 	 * @param type
 	 */
 	public void getLogistic(OnDataReturnListener dataReturnListener, String postid) {
-		// http://www.kuaidi100.com/query?type=zhongtong&postid=719121392152
+		// http://www.kuaidi100.com/query?type=shunfeng&postid=719121392152
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("type", "zhongtong");
+		params.put("type", "shunfeng");
 		params.put("postid", postid);
 		getLogistics(TaskTag.LOGISTIC, params, dataReturnListener);
 	}
@@ -574,7 +574,7 @@ public class DC extends DataCenter {
 	public void ensureGet(OnDataReturnListener dataReturnListener, String orderId) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("ordersId", orderId);
-		getDatasFromServer(TaskTag.ENSUREGET, "orders_realGetOrders.action", params, dataReturnListener);
+		getDatasFromServer(TaskTag.ENSUREGET, "fishshop/orders_realGetOrders.action", params, dataReturnListener);
 	}
 
 	/**
